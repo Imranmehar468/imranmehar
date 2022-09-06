@@ -1,0 +1,166 @@
+                         Run Docker container 
+
+docker run (container name)                    
+                 
+
+--------------------------------------------------------------------------------------------------------------
+
+                                        Download container image
+
+
+docker run -itd (container image)    //// downkload the container image "-itd" means that (intractive  attach docker)
+
+
+----------------------------------------------------------------------
+
+                   To check if run & stop Container commands 
+
+docker ps 
+docker ps -a 
+
+----------------------------------------------------------------------
+
+            start ans stop the docker container 
+
+docker start (container image id)  //// just add first initial letters of container id 
+docker stop (container image id )
+
+-------------------------------------------------------------------------
+                      Simple downlaod container image with hello-world 
+
+
+docker run  hello-world 
+
+----------------------------------------------------------------------------------------
+                    Remove the container commands
+
+docker rm (container id)
+docker container prune /////  this command remove the all container 
+docker stop $(docker ps -aq) //// aq is the id of the container 
+docker rm $(docker ps -aq) //// this command is remove docker container 
+
+---------------------------------------------------------------------------------------
+                 Check and Remove docker images 
+
+docker images
+docker image ls 
+docker rmi (docker image name) ///// this command remove the docker image 
+docker image rm hello-world 
+docker image prune //// this command is remove all the docker images 
+docker container ls 
+docker container ls -a //// this command is that to check the container
+
+----------------------------------------------------------------------------------------
+                           container docker image downlaod 
+
+docker pull (image name)
+docker pull (image name: /// its colon means that to version of the image 
+
+docker run -it ubuntu /////// this command is connect to ubuntu machine 
+
+---------------------------------------------------------------------------
+
+docker exec container id ls ///// to check the all files in the root directory 
+
+----------------------------------------------------------------------------------
+
+              To check container & image information through INSPECT Command 
+
+
+docker inspect (container id)
+docker image inspect (image id)
+
+--------------------------------------------------------------------------------------------
+
+                Deploying web applications with Docker container 
+
+1:  docker pull jenkins/jenkins ///// this command download the jenkins image container 
+2: docker image ls ///// checked the container image 
+3:  docker image inspect (container image id) /////// checked the details of the image and check port which  port container is run throngh inspect 
+4:  docker run -d -p 80:8080 jenkins/jenkins  /////// this command run the container with port 
+4:  docker ps ///// container is run 
+5: now we have checked the on google crom (localhost:80) then enter so jenkins page is open to do copy of the path on given jenkins page 
+6:  docker exec ef "container id" cat "path" ///// so this command to execute the file of container
+7: after run this command we get id to response the command 
+8: copy id and to go jenkins page and paste the id so open the jenkins webside 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                          Docker networks 
+There is three type of docker networks 
+1: bridge 
+2: host 
+3: none
+
+docker network ls 
+docker network inspect (network id)
+ip link ///// this command is check to docker is 0 or any number of docker 
+ip addr //// this command shown the ip address of the bridge network 
+
+
+                   Create Custom network in docker network 
+
+docker network create --driver=(network type) --subnet=(ip of subnet) custom network name
+                   
+                   run custom network in docker container 
+docker run -itd --name=testUbuntu --net=(custom network name) container name 
+docker netwok connect (custom network name) container id ////// this command connect with container 
+docker network disconnet  (custom network name) container id 
+docker network rm custom network name ///// this command is remove the custom network 
+docker network prune ///// this command is delete all the custom network 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                 Communicate between two container 
+1: create the docker custom network 
+2: create two docker container (its up to you create any docker container)
+3: check two container connect which network through inspect 
+4: docker exec -it conatiner id /bin/bash 
+check the container is communicate with network with ping container name 
+5: docker network connect (custom netork name ) (container name) ///// this command is connect to the network 
+6: again run line NO 4 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                    Docker volumes
+
+cd /var/lib/docker
+cd volumes 
+
+docker volume create (name_volume) //// this command is create a volume 
+docker run -itd -v (volume name):/library container image
+docker exec -it container id bash (file path) 
+--> create a file is root 
+stop the container //// file still there throug ls 
+remove container ////// file still there 
+now we can create new volume container 
+connect exec command with bash 
+-----------------------------------------------------------------------------------------------------------------
+          
+                           Docker bind volumes
+mkdir /// create directory 
+pwd 
+docker run -itd -v /home/imran/data:/file container image 
+docker ps 
+docker exec -it container id /bin/bash  //// connect to the root user 
+docker run --mount type=bind,source-/home/imran/data,target=/file container image ///// this is another way to create a docker bind volume 
+docker exec -it container id /bin/bash  //// connect to the root user 
+stop container 
+rm container 
+dokcer volume rm (volmue_name) //// this file is rm the docker volume 
+
+
+
+ 
+
+
+
+                                               
+
+
+
+
+
+
+
+
